@@ -29,14 +29,3 @@ def omitted_data(dataset, year):
 
 dataset_name_list = ['AVHRR_OI_SST/v2.1', 'CMC/deg0.1', 'DMI_SST', 'GAMSSA_GDS2', 'MUR_SST', 'MW_IR_SST', 'MW_OI_SST', 'NAVO_K10_SST_GDS2', 'OSPO_SST', 'OSPO_SST_Night', 'OSTIA_SST']
 dataset = 'DMI_SST'
-
-
-# year option을 for문으로 추가
-for year in os.listdir(dataset):
-    omit_list = omitted_data(dataset, year)
-    print(f'{year} 누락 일 수 : {omit_list[1]}')
-    print(f'{omit_list[0]}')
-
-
-
-## TODO 시작일, 종료일이 1월 1일, 12월 31일이 아닐 경우에 대해서 고려
