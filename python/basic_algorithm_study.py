@@ -1,8 +1,5 @@
 #### 1-1  세 정수의 최댓값 구하기
 # 내풀이
-from re import I
-
-
 def max3():
     print('세 정수의 최댓값을 구합니다.')
     a, b, c = map(int, input('세 정수를 입력하세요 :').split())
@@ -62,7 +59,7 @@ def med3(a, b, c):
 def sum_to_n():
     n = int(input('n 값을 입력하세요.'))
     sum = 0
-    for number in range(0, n+1):
+    for number in range(1, n+1):
         sum += number
     return sum
 
@@ -108,3 +105,80 @@ def print_asterisk_breakline():
     n, w = map(int, input('*를 n개 출력하고 w개마다 줄바꿈합니다.').split())
     result = ('*'* w+'\n') * (n // w) + '*' * (n % w)
     return result
+
+
+#### 1-7. 직사각형의 변의 길이 쌍 구하기
+## 내풀이
+def rectangle_side():
+    area = int(input('직사각형의 넓이를 입력하세요.'))
+    i = area
+    side1 = side2 = 0
+    while i >= 1 :
+        if area % i == 0:
+            side1, side2 = i, area // i 
+            if side1 < side2: print(f'{side1} * {side2}') 
+        i -= 1
+
+## 책풀이
+'''
+area = int(input('직사각형의 넓이를 입력하세요.: '))
+
+for i in range(1, area + 1):
+    if i * i > area: break
+    if area * i: continue
+    print(f'{i} * {area // i}')
+'''
+
+
+#### 1-8. 10~99 사이의 난수 n개 생성하기(13이 나오면 중단)
+## 내풀이
+def random_number():
+    import random
+    n = int(input('난수의 개수를 입력하세요.'))
+    for _ in range(n):
+        r = random.randint(10,99)
+        print(r, end=' ')
+        if r == 13 : 
+            print('프로그램을 종료합니다.')
+            break
+
+
+#### 1-9. 건너뛰고 출력하기
+def skip_number():
+    for i in range(1,13):
+        if i == 8: continue
+        print(i, end=' ')
+
+
+#### 1-10. 구구단 출력
+## 내풀이
+def multiplication_table():
+    for i in range(1, 10):
+        for j in range(1, 10):
+            print('%02d' %(i*j), end=' ')
+        print() # 행변경 '\n'을 하면 두 줄이 띄어짐
+
+## 책풀이
+'''
+print('-' * 27)
+for i in range(1, 10):
+    for j in range(1, 10):
+        print(f'{i * j:3}', end='')
+    print()
+print('-' * 27)
+'''
+
+#### 1-11. 직각이등변삼각형
+#*
+#**
+#***
+## 내풀이
+def isosceles_right_triangle(): # 왼쪽으로 출력
+    n = int(input('직각이등변삼각형의 짧은 변의 길이를 입력하세요.'))
+    for i in range(1, n+1):
+        print('*' * i , i)
+
+def isosceles_right_triangle_2(): # 오른쪽으로 출력
+    n = int(input('직각이등변삼각형의 짧은 변의 길이를 입력하세요.'))
+    for i in range(1, n+1):
+        print(' '* (n - i) + '*' * i , i)
