@@ -1,4 +1,4 @@
-#### 1-1  세 정수의 최댓값 구하기
+#### 1-1. 세 정수의 최댓값 구하기
 # 내풀이
 def max3():
     print('세 정수의 최댓값을 구합니다.')
@@ -7,6 +7,7 @@ def max3():
     maximum = max([a,b,c])
     #print(f'최댓값은 "{maximum}"입니다.')
     return maximum
+    
 '''
 # 책풀이
 def max3(a, b, c):
