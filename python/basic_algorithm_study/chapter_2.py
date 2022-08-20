@@ -213,13 +213,12 @@ print(counter)
 def is_prime3_2(n: int):
     counter = 0
     prime_list = [2, 3]
-    for i in range(5, n+1, 2):
-        for j in prime_list:
+    for i in range(5, n+1, 2): # 같음
+        for j in prime_list[1:]:
             if j * j > i:
                 break
             counter += 2
         end = prime_list.index(j)
-        start = end - 1
         for k in prime_list[:end]:
             if i % k == 0: break
             counter += 1
