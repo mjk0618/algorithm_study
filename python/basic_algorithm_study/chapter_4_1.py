@@ -43,7 +43,7 @@ class FixedStack:
     def pop(self) -> Any:
         """ 스택에서 데이터를 팝(꼭대기 데이터를 꺼냄) """
         if self.is_empty():         # 스택이 비어 있는 경우
-            raise FixedStack.Empty  # 예최 처리 발생
+            raise FixedStack.Empty  # 예외 처리 발생
         self.ptr -= 1
         return self.stk[self.ptr - 1]
 
