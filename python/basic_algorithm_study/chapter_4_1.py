@@ -198,54 +198,55 @@ class Stack:
         """ 스택 안에 있는 모든 데이터를 나열(바닥에서 꼭대기 순으로 출력) """
         print(list(self.__stk))
 
-from enum import Enum
-Menu = Enum('Menu', ['푸시', '팝', '피크', '검색', '덤프', '종료'])
+if __name__ == '__main__':
+    from enum import Enum
+    Menu = Enum('Menu', ['푸시', '팝', '피크', '검색', '덤프', '종료'])
 
-def select_menu() -> Menu:
-    """메뉴 선택"""
-    s = [f'({m.value}){m.name}' for m in Menu]
+    def select_menu() -> Menu:
+        """메뉴 선택"""
+        s = [f'({m.value}){m.name}' for m in Menu]
+        while True:
+            print(*s, sep='  ', end='\n')
+            n = int(input('：'))
+            if 1 <= n <= len(Menu):
+                return Menu(n)
+
+    s = Stack(64)  # 최대 64 개를 푸시할 수 있는 스택
+
     while True:
-        print(*s, sep='  ', end='\n')
-        n = int(input('：'))
-        if 1 <= n <= len(Menu):
-            return Menu(n)
+        print(f'현재 데이터 개수：{len(s)} / {s.capacity}')
+        menu = select_menu()  # 메뉴 선택
 
-s = Stack(64)  # 최대 64 개를 푸시할 수 있는 스택
+        if menu == Menu.푸시:  # 푸시
+            x = int(input('데이터：'))
+            try:
+                s.push(x)
+            except IndexError:
+                print('스택이 가득 찼습니다.')
 
-while True:
-    print(f'현재 데이터 개수：{len(s)} / {s.capacity}')
-    menu = select_menu()  # 메뉴 선택
+        elif menu == Menu.팝:  # 팝
+            try:
+                x = s.pop()
+                print(f'팝한 데이터는 {x}입니다.')
+            except IndexError:
+                print('스택이 비어 있습니다.')
 
-    if menu == Menu.푸시:  # 푸시
-        x = int(input('데이터：'))
-        try:
-            s.push(x)
-        except IndexError:
-            print('스택이 가득 찼습니다.')
+        elif menu == Menu.피크:  # 피크
+            try:
+                x = s.peek()
+                print(f'피크한 데이터는 {x}입니다.')
+            except IndexError:
+                print('스택이 비어 있습니다.')
 
-    elif menu == Menu.팝:  # 팝
-        try:
-            x = s.pop()
-            print(f'팝한 데이터는 {x}입니다.')
-        except IndexError:
-           print('스택이 비어 있습니다.')
+        elif menu == Menu.검색:  # 검색
+            x = int(input('검색 값을 입력하세요：'))
+            if x in s:
+                print(f'{s.count(x)} 개를 포함하고, 맨 앞쪽의 위치는 {s.find(x)}입니다.')
+            else:
+                print('검색 값은 포함되어 있지 않습니다.')
+                
+        elif menu == Menu.덤프:  # 덤프
+            s.dump()
 
-    elif menu == Menu.피크:  # 피크
-        try:
-            x = s.peek()
-            print(f'피크한 데이터는 {x}입니다.')
-        except IndexError:
-           print('스택이 비어 있습니다.')
-
-    elif menu == Menu.검색:  # 검색
-        x = int(input('검색 값을 입력하세요：'))
-        if x in s:
-            print(f'{s.count(x)} 개를 포함하고, 맨 앞쪽의 위치는 {s.find(x)}입니다.')
         else:
-            print('검색 값은 포함되어 있지 않습니다.')
-            
-    elif menu == Menu.덤프:  # 덤프
-        s.dump()
-
-    else:
-        break
+            break
