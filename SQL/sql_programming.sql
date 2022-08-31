@@ -1,0 +1,26 @@
+DROP PROCEDURE IF EXISTS ifProc1;
+DELIMITER $
+CREATE PROCEDURE ifProc1()
+BEGIN
+    IF 100 = 100 THEN
+        SELECT '100은 100과 같습니다.';
+    END IF;
+END $
+DELIMITER ;
+CALL ifProc1();
+
+
+DROP PROCEDURE IF EXISTS ifProc2;
+DELIMITER $
+CREATE PROCEDURE ifProc2()
+BEGIN
+    DECLARE myNUM INT;
+    SET myNUM 200;
+    IF myNum = 100 THEN
+        SELECT '100입니다.';
+    ELSE
+        SELECT '100이 아닙니다.'
+    END IF;
+END $
+DELIMITER ;
+CALL ifProc2();
