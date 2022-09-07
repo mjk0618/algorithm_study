@@ -70,6 +70,14 @@ class Point:
         if self.y ** 2 != self. x ** 3 + a * x + b:
             raise ValueError(f'({x}, {y}) is not on the curve.')
 
+    def __repr__(self):
+        if self.x is None:
+            return 'Point(infinity)'
+        elif isinstance(self.x, FieldElement):
+            return f'Point({self.x.num},{self.y.num})_{self.a.num}_{self.b.num} FieldElement({self.x.prime})'
+        else:
+            return f'Point({self.x},{self.y})_{self.a}_{self.b}'
+
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y \
             and self.a == other.a and self.b == other.b # \는 줄바꿈
