@@ -1,3 +1,9 @@
+from random import randint
+from unittest import TestCase
+
+import hashlib
+import hmac
+
 ## 유한체 정의
 class FieldElement:
     def __init__(self, num, prime):
@@ -56,8 +62,13 @@ class FieldElement:
     def __truediv__(self, other):
         if self.prime != other.prime:
             raise TypeError('Cannot divide two numbers in different Fields')
-        num = (self.num * ((other.num) ** (self.prime -2))) % self.prime
+        # num = (self.num * ((other.num) ** (self.prime -2))) % self.prime
+        num = (self.num * pow(other.num, self.prime - 2, self.prime)) % self.prime
         return self.__class__(num, self.prime)
+    
+    def __rmul__(self, coefficient):
+        num = (self.num * coefficient) % self.prime
+        return self.__class__(num = num, prime = self.prime)
 
 
 #### 타원곡선(Elliptic Curve: EC)의 한 점에 관심을 가짐
@@ -67,6 +78,8 @@ class Point:
         self.b = b
         self.x = x
         self.y = y
+        if self.x is None and self.y is None:
+            return
         if self.y ** 2 != self. x ** 3 + a * x + b:
             raise ValueError(f'({x}, {y}) is not on the curve.')
 
@@ -108,13 +121,52 @@ class Point:
             y = s * (self.x - x) - self.y
             return self.__class__(x, y, self.a, self.b)
         
+        # Case 4: if we are tangent  to the vertical line
+        if self == other and self.y == 0 * self.x:
+            return self.__class__(None, None, self.a, self.b)
+        
         # Case 3: x1 == x2
-        if self.x == other.x and self.y == other.y:
-            s = (3 * self.x ** 2 + self.a) / 2 * self.y
+        if self == other:
+            s = (3 * self.x ** 2 + self.a) / (2 * self.y)
             x = s ** 2 - 2 * self.x
             y = s * (self.x - x) - self.y
             return self.__class__(x, y, self.a, self.b)
 
-        # Case 4: if we are tangent  to the vertical line
-        if self == other and self.y == 0 * self.x:
-            return self.__class__(None, None, self.a, self.b)
+    def __rmul__(self, coefficient):
+        coef = coefficient
+        current = self
+        result = self.__class__(None, None, self.a, self.b)
+        while coef:
+            if coef & 1:
+                result += current
+            current += current
+            coef >>= 1
+        return result
+
+class ECCTest(TestCase):
+
+    def test_add(self):
+        # tests the following additions on curve y^2 = x^3 - 7 over F_223:
+        prime = 223
+        a = FieldElement(0, prime)
+        b = FieldElement(7, prime)
+
+        additions = (
+            # (x1, y1, x2, y2, x3, y3)
+            (170, 142, 60, 139, 220, 181),
+            (47, 71, 117, 141, 60, 139),
+            (143, 98, 76, 66, 47, 71),
+        )
+
+        for x1_raw, y1_raw, x2_raw, y2_raw, x3_raw, y3_raw in additions:
+            x1 = FieldElement(x1_raw, prime)
+            y1 = FieldElement(y1_raw, prime)
+            p1 = Point(x1, y1, a, b)
+            x2 = FieldElement(x2_raw, prime)
+            y2 = FieldElement(y2_raw, prime)
+            p2 = Point(x2, y2, a, b)
+            x3 = FieldElement(x3_raw, prime)
+            y3 = FieldElement(y3_raw, prime)
+            p3 = Point(x3, y3, a, b)
+            self.assertEqual(p1 + p2, p3)
+
