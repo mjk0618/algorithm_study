@@ -125,3 +125,13 @@ def _2908():
     a = int(''.join(a))
     b = int(''.join(b))
     print(a if a > b else b)
+
+def _2920():
+    s = list(input().split(' '))
+    result = set([])
+    for i in range(len(s) - 1):
+        if s[i] < s[i + 1]:
+            result.add('ascending')
+        elif s[i] > s[i + 1]:
+            result.add('descending')
+    print(list(result)[0] if len(result) == 1 else 'mixed')
