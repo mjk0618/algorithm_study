@@ -134,4 +134,4 @@ def _2920():
             result.add('ascending')
         elif s[i] > s[i + 1]:
             result.add('descending')
-    print(list(result)[0] if len(result) == 1 else 'mixed')
+    print(list(result)[0] if len(result) == 1 else 'mixed') 
