@@ -135,3 +135,129 @@ def _2920():
         elif s[i] > s[i + 1]:
             result.add('descending')
     print(list(result)[0] if len(result) == 1 else 'mixed') 
+
+def _3052():
+    num_list = []
+    mod_list = []
+    for _ in range(10):
+        num = int(input())
+        num_list.append(num)
+        mod_list.append(num % 42)
+
+    mod_set = set(mod_list)
+    print(len(mod_set))
+
+    num = int(input())
+    answer_list = []
+    for _ in range(num):
+        answer_list.append(input())
+
+def _8958():
+    for answer in answer_list:
+        total = 0
+        score = 0
+        for i in answer:
+            if i == 'O':
+                score += 1
+            else: score = 0
+            total += score
+        print(total)
+
+def _9498():
+    score = int(input())
+    if 90 <= score <= 100:
+        print('A')
+    elif 80 <= score <= 89:
+        print('B')
+    elif 70 <= score <= 79:
+        print('C')
+    elif 60 <= score <= 69:
+        print('D')
+    else: 
+        print('F')
+
+def _10171():
+    print(r"\    /\ ")
+    print(r" )  ( ')")
+    print(r"(  /  ) ")
+    print(r" \(__)| ")
+
+
+def _10171_2():
+    cat = r"""
+    \    /\
+    )  ( ')
+    (  /  )
+    \(__)|
+    """
+    print(cat)
+
+def _10172():
+    print(r"|\_/|")
+    print(r"|q p|   /}")
+    print(r'( 0 )"""\ ')
+    print(r'|"^"`    |')
+    print(r"||_/=\\__|")
+
+def _10809(): # find 함수 활용하면 더 쉬움
+    word = input()
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    pos = [-1] * 26
+    for i in range(len(word)):
+        if pos[alphabet.index(word[i])] == -1:
+            pos[alphabet.index(word[i])] = i
+        else: pass
+    pos = ' '.join(str(i) for i in pos)
+    print(pos)
+
+def _10818():
+    n = int(input())
+    num = list(map(int, input().split()))
+    print(min(num), max(num))
+
+def _10869():
+    a, b = map(int, input().split())
+    print(a + b)
+    print(a - b)
+    print(a * b)
+    print(a // b)
+    print(a % b)
+
+def _10871():
+    n, x = map(int, input().split())
+    a = list(map(int, input().split()))
+    print(*[i for i in a if i < x])
+
+def _10950():
+    n = int(input())
+    for _ in range(n):
+        a, b = map(int, input().split())
+        print(a + b)
+
+def _10951(): 
+    while True:
+        try:
+            a, b = map(int, input().split())
+            print(a + b)
+        except: break
+
+def _10952():
+    while True:
+        a, b = map(int, input().split())
+        if (a, b) == (0, 0):
+            break
+        print(a + b)
+
+def _10998():
+    a, b = map(int, input().split())
+    print(a * b)
+
+def _11654():
+    i = input()
+    print(ord(i))
+
+def _11720():
+    n = int(input())
+    num = input()
+    total = sum(int(i) for i in num)
+    print(total)
