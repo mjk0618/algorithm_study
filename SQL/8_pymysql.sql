@@ -1,5 +1,0 @@
-USE soloDB;
-DROP DATABASE IF EXISTS soloDB;
-CREATE DATABASE soloDB;
-SELECT * FROM userTable;
-DROP TABLE userTable;
