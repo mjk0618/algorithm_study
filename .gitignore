@@ -4,3 +4,4 @@ __pycache__
 .vscode
 python/NLP/content/
 python/NLP/nlpbook
+python/data_analysis/datasets
