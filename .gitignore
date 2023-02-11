@@ -2,7 +2,9 @@ __pycache__
 .ipynb_checkpoints
 .cph
 .vscode
+.h5
 python/ai/NLP/content/
 python/ai/NLP/nlpbook
 python/data_analysis/datasets
 python/ai/hands_on_machine_learning/images
+python/ai/hands_on_machine_learning/my_logs
