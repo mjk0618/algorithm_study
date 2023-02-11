@@ -1,8 +1,12 @@
 __pycache__
-.ipynb_checkpoints
-.cph
-.vscode
-.h5
+
+# file extension
+*.ipynb_checkpoints
+*.cph
+*.vscode
+*.h5
+
+# dirs
 python/ai/NLP/content/
 python/ai/NLP/nlpbook
 python/data_analysis/datasets
